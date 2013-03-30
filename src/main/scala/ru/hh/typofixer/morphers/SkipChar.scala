@@ -9,7 +9,7 @@ class SkipChar extends Morph {
       token
     else
       new Variant(
-        (0 until (value.length - 1) toList) map(idx =>
+        0 until (value.length - 1) map(idx =>
           new Word(value.substring(0, idx).concat(value.substring(idx + 1))))
       )
   }

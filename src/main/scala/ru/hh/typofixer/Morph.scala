@@ -13,9 +13,7 @@ abstract class Morph {
 
   def apply(token: Word): Token = token
 
-  def apply(token: Variant): Token = new Variant(applyToList(token.values))
+  def apply(token: Variant): Token = new Variant(token.values.map(apply))
 
-  def apply(token: Phrase): Token = new Phrase(applyToList(token.values))
-
-  def applyToList(tokens: List[Token]): List[Token] = tokens.map(apply)
+  def apply(token: Phrase): Token = new Phrase(token.values.map(apply))
 }

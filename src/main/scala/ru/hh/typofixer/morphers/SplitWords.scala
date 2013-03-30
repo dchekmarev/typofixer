@@ -9,7 +9,7 @@ class SplitWords extends Morph {
       word
     else
       new Variant(
-        (1 until value.length toList) map(idx =>
+        1 until value.length map(idx =>
           new Phrase(List(substrToWord(value, 0, idx), substrToWord(value, idx, value.length))))
       )
   }
