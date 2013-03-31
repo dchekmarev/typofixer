@@ -11,7 +11,7 @@ class WrongKeyTable extends Morph {
   val INDEXES = TABLES.map(table => table -> table.map(ch => ch -> table.indexOf(ch)).toMap).toMap
 
   override def apply(token: Word) = {
-    val value: String = token.value
+    val value = token.string
     new Variant(TABLES.map(toTable =>
       new Word(value.map(ch =>
         TABLES.map(fromTable => {

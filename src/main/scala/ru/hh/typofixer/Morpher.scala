@@ -21,13 +21,16 @@ object Morpher {
 
   val configured =
     create.
-      add(new NoMorph).
       add(new SplitWords).
       pipe(create.
+        add(new NoMorph).
         add(new WrongKeyTable).
         pipe(create.
           add(new NoMorph).
-          add(new SkipChar)
-          add(new DoubleChars)
-    ))
+          add(new SplitChars).
+          add(new SkipChar).
+          add(new DoubleChars).
+          add(new Permutation(2))
+      )
+    )
 }

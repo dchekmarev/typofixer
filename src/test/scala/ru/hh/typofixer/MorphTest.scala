@@ -13,7 +13,7 @@ class MorphTest {
     Morpher.create.add(new WrongKeyTable).apply(EMPTY_WORD)
     Morpher.create.add(new DoubleChars).apply(EMPTY_WORD)
     Morpher.create.add(new SkipChar).apply(EMPTY_WORD)
-    Morpher.create.add(new SplitWords).apply(EMPTY_WORD)
+    Morpher.create.add(new SplitChars).apply(EMPTY_WORD)
   }
 
   @Test
@@ -26,10 +26,21 @@ class MorphTest {
   }
 
   @Test
+  def testPermutation {
+    assertEquals(new Permutation().apply(new Word("ehllo")).value(Map("hello" -> 1)), "hello")
+    assertEquals(new Permutation(2).apply(new Word("sotfwaer")).value(Map("software" -> 1)), "software")
+  }
+
+  @Test
+  def testSplitWords {
+    assertEquals(new SplitWords().apply(new Word("hello,world")).value(Map("hello" -> 1)), "hello world")
+  }
+
+  @Test
   def testReal {
     testMorph(Morpher.configured, "", "")
-    testMorph(Morpher.configured, "javaghjuhfvvbcn", "java программист")
-    testMorph(Morpher.configured, "ghjuhfvvbcnjavva", "программист java")
+    testMorph(Morpher.configured, "java-ghjuhfvvbcn", "java программист")
+    testMorph(Morpher.configured, "ghjuhfvvbcn javva", "программист java")
   }
 
   def testMorph(morpher: Morpher, source: String, target: String) {

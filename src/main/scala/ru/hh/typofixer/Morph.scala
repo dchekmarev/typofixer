@@ -16,4 +16,8 @@ abstract class Morph {
   def apply(token: Variant): Token = new Variant(token.values.map(apply))
 
   def apply(token: Phrase): Token = new Phrase(token.values.map(apply))
+
+  def substrToWord(value: String, from: Int, to: Int): Word = {
+    new Word(value.substring(from, to))
+  }
 }

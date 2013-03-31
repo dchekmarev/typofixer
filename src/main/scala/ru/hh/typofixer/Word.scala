@@ -1,9 +1,9 @@
 package ru.hh.typofixer
 
-class Word(val value: String) extends Token {
-  def weight(dict: Map[String, Int]) = dict.getOrElse(value, 0)
+class Word(val string: String) extends Token {
+  def weight(dict: Map[String, Int]) = dict.getOrElse(string, 0)
 
-  def value(dict: Map[String, Int], lowBound: Int) = value
+  def value(dict: Map[String, Int], lowBound: Int) = string
 
-  override def toString = value
+  override def toString = string
 }

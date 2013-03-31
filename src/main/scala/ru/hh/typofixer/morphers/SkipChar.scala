@@ -4,7 +4,7 @@ import ru.hh.typofixer.{Variant, Word, Morph}
 
 class SkipChar extends Morph {
   override def apply(token: Word) = {
-    val value: String = token.value
+    val value = token.string
     if (value.length == 0)
       token
     else
