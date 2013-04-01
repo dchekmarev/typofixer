@@ -6,7 +6,7 @@ import java.util
 class Dictionary(val words: Array[String]) {
   def weight(word: String) = {
     val idx = util.Arrays.binarySearch(words.asInstanceOf[Array[AnyRef]], word)
-    if (idx >= 0 && words(idx) == word) 10 + word.length else 0
+    if (idx >= 0 && words(idx) == word) word.length - 2 else 0
   }
 }
 
