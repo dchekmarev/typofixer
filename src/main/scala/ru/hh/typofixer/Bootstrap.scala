@@ -28,9 +28,10 @@ object Bootstrap {
             val texts = parameters.get("text")
             val word = new Word(if (texts == null) "" else texts.mkString(" "))
             val result = morpher.apply(word)
+            buf.writeBytes("result = ".getBytes)
+            buf.writeBytes(result.value(Dictionary.prod).getBytes)
+            buf.writeBytes("\n\n".getBytes)
             buf.writeBytes(result.toString.getBytes)
-            buf.writeBytes("\n".getBytes)
-            buf.writeBytes(result.value(Dictionary.dict).getBytes)
             response.setContent(buf)
             e.getChannel.write(response).addListener(ChannelFutureListener.CLOSE)
           }

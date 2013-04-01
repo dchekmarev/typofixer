@@ -19,21 +19,19 @@ class MorphTest {
   @Test
   def testWrongKeyTable {
     val morph = new WrongKeyTable
-    assertEquals(morph.apply(new Word("руддщ")).value(Map("hello" -> 1)), "hello")
-    assertEquals(morph.apply(new Word("ntcn")).value(Map("тест" -> 1)), "тест")
-    assertEquals(morph.apply(new Word("сай")).value(Map("сай" -> 1, "cfq" -> 2)), "cfq")
-    assertEquals(morph.apply(new Word("сай")).value(Map("сай" -> 2, "cfq" -> 1)), "сай")
+    assertEquals(morph.apply(new Word("руддщ")).value(Dictionary("hello")), "hello")
+    assertEquals(morph.apply(new Word("ntcn")).value(Dictionary("тест")), "тест")
   }
 
   @Test
   def testPermutation {
-    assertEquals(new Permutation().apply(new Word("ehllo")).value(Map("hello" -> 1)), "hello")
-    assertEquals(new Permutation(2).apply(new Word("sotfwaer")).value(Map("software" -> 1)), "software")
+    assertEquals(new Permutation().apply(new Word("ehllo")).value(Dictionary("hello")), "hello")
+    assertEquals(new Permutation(2).apply(new Word("sotfwaer")).value(Dictionary("software")), "software")
   }
 
   @Test
   def testSplitWords {
-    assertEquals(new SplitWords().apply(new Word("hello,world")).value(Map("hello" -> 1)), "hello world")
+    assertEquals(new SplitWords().apply(new Word("hello,world")).value(Dictionary("hello")), "hello world")
   }
 
   @Test
@@ -41,6 +39,7 @@ class MorphTest {
     testMorph(Morpher.configured, "", "")
     testMorph(Morpher.configured, "java-ghjuhfvvbcn", "java программист")
     testMorph(Morpher.configured, "ghjuhfvvbcn javva", "программист java")
+    testMorph(Morpher.configured, "vtytl;th", "менеджер")
   }
 
   def testMorph(morpher: Morpher, source: String, target: String) {
@@ -50,7 +49,7 @@ class MorphTest {
   def testMorph(morpher: Morpher, source: Token, target: String) {
     val result: Token = morpher.apply(source)
     println(source + " -> " + result)
-    val resultValue: String = result.value(Dictionary.dict)
+    val resultValue: String = result.value(Dictionary.test)
     println(source + " -> " + resultValue)
     println("expect: " + target)
     assertEquals(resultValue, target)

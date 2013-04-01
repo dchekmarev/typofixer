@@ -1,11 +1,11 @@
 package ru.hh.typofixer
 
 abstract class Token {
-  def weight(dict: Map[String, Int]): Int
+  def weight(dict: Dictionary): Int
 
-  def value(dict: Map[String, Int], lowBound: Int): String
+  def value(dict: Dictionary, lowBound: Int): String
 
-  def value(dict: Map[String, Int]): String = value(dict, -1)
+  def value(dict: Dictionary): String = value(dict, -1)
 
   def toString: String
 }
