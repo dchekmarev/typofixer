@@ -11,8 +11,9 @@ class Permutation(val times: Int) extends Morph {
     if (times == 0)
       List(value)
     else
+      List(value) ++
       (offset until (value.length - 1) map (i =>
-        apply(value.substring(0, i) + value.charAt(i + 1) + value.charAt(i) + value.substring(i + 2), i + 1, times - 1)
+        apply(value.substring(0, i) + value.charAt(i + 1) + value.charAt(i) + value.substring(i + 2), i + 2, times - 1)
       )).flatten
   }
 }
