@@ -36,20 +36,24 @@ class MorphTest {
 
   @Test
   def testReal {
-    testMorph(Morpher.configured, "", "")
-    testMorph(Morpher.configured, "java-ghjuhfvvbcn", "java программист")
-    testMorph(Morpher.configured, "ghjuhfvvbcn javva", "программист java")
-    testMorph(Morpher.configured, "vtytl;th", "менеджер")
+    realMorph(Morpher.configured, "", "")
+    realMorph(Morpher.configured, "java-ghjuhfvvbcn", "java программист")
+    realMorph(Morpher.configured, "ghjuhfvvbcn javva", "программист java")
+    realMorph(Morpher.configured, "vtytl;thghjtrnjd", "менеджер проектов")
   }
 
   def testMorph(morpher: Morpher, source: String, target: String) {
-    testMorph(morpher, new Word(source), target)
+    testMorph(morpher, new Word(source), target, Dictionary.test)
   }
 
-  def testMorph(morpher: Morpher, source: Token, target: String) {
+  def realMorph(morpher: Morpher, source: String, target: String) {
+    testMorph(morpher, new Word(source), target, Dictionary.prod)
+  }
+
+  def testMorph(morpher: Morpher, source: Token, target: String, dict: Dictionary) {
     val result: Token = morpher.apply(source)
     println(source + " -> " + result)
-    val resultValue: String = result.value(Dictionary.test)
+    val resultValue: String = result.value(dict)
     println(source + " -> " + resultValue)
     println("expect: " + target)
     assertEquals(resultValue, target)

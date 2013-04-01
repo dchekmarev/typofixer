@@ -22,15 +22,16 @@ object Bootstrap {
         pipeline.addLast("handler", new SimpleChannelUpstreamHandler {
           override def messageReceived(ctx: ChannelHandlerContext, e: MessageEvent) {
             val response = new DefaultHttpResponse(HttpVersion.HTTP_1_0, HttpResponseStatus.OK)
-            response.setHeader("Content-Type", "text/plain; charset=UTF-8")
+            response.setHeader("Content-Type", "text/html; charset=UTF-8")
             val buf = ChannelBuffers.dynamicBuffer
             val parameters = new QueryStringDecoder((e.getMessage.asInstanceOf[HttpRequest]).getUri).getParameters
             val texts = parameters.get("text")
             val word = new Word(if (texts == null) "" else texts.mkString(" "))
             val result = morpher.apply(word)
+            buf.writeBytes("<form><input name=text><input type=submit></form><br/><br/>".getBytes)
             buf.writeBytes("result = ".getBytes)
             buf.writeBytes(result.value(Dictionary.prod).getBytes)
-            buf.writeBytes("\n\n".getBytes)
+            buf.writeBytes("<br/><br/>".getBytes)
             buf.writeBytes(result.toString.getBytes)
             response.setContent(buf)
             e.getChannel.write(response).addListener(ChannelFutureListener.CLOSE)
