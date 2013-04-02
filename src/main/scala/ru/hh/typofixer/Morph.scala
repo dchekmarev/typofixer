@@ -5,7 +5,7 @@ import java.lang.IllegalArgumentException
 abstract class Morph {
   def apply(token: Token): Token =
     token match {
-      case token: Word => apply(token)
+      case token: Word => if (token.found) token else apply(token)
       case token: Phrase => apply(token)
       case token: Variant => apply(token)
       case _ => throw new IllegalArgumentException(token.getClass.getCanonicalName)
