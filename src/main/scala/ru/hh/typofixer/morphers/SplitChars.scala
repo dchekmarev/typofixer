@@ -3,10 +3,10 @@ package ru.hh.typofixer.morphers
 import ru.hh.typofixer.{Phrase, Variant, Word, Morph}
 
 class SplitChars extends Morph {
-  override def apply(word: Word) = {
-    val value = word.string
+  override def apply(token: Word) = {
+    val value = token.string
     if (value.length < 2)
-      word
+      token
     else
       new Variant(
         1 until value.length map(idx =>

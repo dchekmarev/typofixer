@@ -23,14 +23,17 @@ object Morpher {
     create.
       add(new SplitWords).
       pipe(create.
-        add(new NoMorph).
-        add(new WrongKeyTable).
+        add(new SplitCharsets).
         pipe(create.
           add(new NoMorph).
-          add(new SplitChars).
-          add(new SkipChar).
-          add(new DoubleChars).
-          add(new Permutation(2))
+          add(new WrongKeyTable).
+          pipe(create.
+            add(new NoMorph).
+            add(new SplitChars).
+            add(new SkipChar).
+            add(new DoubleChars).
+            add(new Permutation(2))
+        )
       )
     )
 }
