@@ -1,22 +1,20 @@
 typofixer
 =========
 
-Какие опечатки могут быть:
+What can it fix:
 
-1. пропущен символ
-2. присутствует лишний символ
-3. залипшая клавиша
-4. изменен символ
-5. неправильная раскладка (возможно часть фразы, например "java ghjuhfvvbcn" -> "java программист")
-6. слитное написание
-7. перемешанные символы (ehlo -> hello)
+1. skipped character
+2. injected wrong character
+3. duplicated character
+4. modified character
+5. wrong keymap, full or part of word (english <-> russian, ex: "java ghjuhfvvbcn" -> "java программист")
+6. concatenated words
+7. wrong characted order (ehlo -> hello)
 
 todo:
 
-* записать/зарисовать логику работы приложения
-* подгрузка внешнего словаря
-* матч на паттерн, а не только словарь (домены, адреса url)
-* вставка символа
-* дедупликация символа
-* повторение морфера
-* возможно, ограничение цены
+* docs
+* external dict
+* domains/urls
+* repeated momrph
+* price/time limit
